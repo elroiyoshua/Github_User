@@ -7,4 +7,7 @@ interface ApiService {
     @GET("search/users")
     @Headers("Authorization: token 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")
     fun getItem(@Query("q")query: String): Call<GithubResponse>
+    @GET("users/{username}")
+    @Headers("Authorization: token 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")
+    fun getDetailUser(@Path("username") username: String): Call<DetailUserResponse>
 }
