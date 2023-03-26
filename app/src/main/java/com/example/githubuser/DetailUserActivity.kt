@@ -19,6 +19,8 @@ class DetailUserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val username = intent.getStringExtra(TAG_USERNAME)
+        val bundle = Bundle()
+        bundle.putString(TAG_USERNAME,username)
 
         viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
 
@@ -36,7 +38,7 @@ class DetailUserActivity : AppCompatActivity() {
                 }
             }
         })
-        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
+        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager,bundle)
         binding.apply {
             viewPager.adapter = sectionPagerAdapter
             tablayouts.setupWithViewPager(viewPager)
