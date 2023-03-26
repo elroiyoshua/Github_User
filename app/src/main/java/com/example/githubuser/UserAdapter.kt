@@ -12,26 +12,32 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.databinding.ItemRowBinding
 
-class UserAdapter(private val listUser : List<ItemsItem>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
-
-    class ViewHolder(private val binding: ItemRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        var image : ImageView = binding.imgItemPhoto
-        var tvItemName: TextView = binding.tvItemName
-
+class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+    private val listUser =  ArrayList<ItemsItem>()
+    fun setList (user: ArrayList<ItemsItem>){
+        listUser.clear()
+        listUser.addAll(user)
+        notifyDataSetChanged()
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : UserAdapter.ViewHolder{
+    fun setList2(user: ArrayList<ItemsItem>){
+        listUser.addAll(user)
+    }
+    inner class ViewHolder(private val binding: ItemRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(user : ItemsItem){
+            binding.apply {
+                Glide.with(itemView).load(user.avatarUrl).into(imgItemPhoto)
+                tvItemName.text = user.login
+            }
+        }
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder{
         val binding  =ItemRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
-
-
     override fun getItemCount()= listUser.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)   {
-        val pos = listUser[position]
-        holder.tvItemName.text= pos.login
-        Glide.with(holder.itemView).load(pos.avatarUrl).into(holder.image)
+        holder.bind(listUser[position])
     }
 }

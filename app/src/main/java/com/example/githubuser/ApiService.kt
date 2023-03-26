@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-    @GET("users")
-    fun getItem(): Call<List<ItemsItem>>
+    @GET("search/users")
+    @Headers("Authorization: token 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")
+    fun getItem(@Query("q")query: String): Call<GithubResponse>
 }
