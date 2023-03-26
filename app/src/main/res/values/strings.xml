@@ -3,4 +3,13 @@
     <string name="name">nama user</string>
     <string name="search">Search</string>
     <string name="search_hint">Masukkan Username</string>
+    <string name="login">login</string>
+    <string name="username">username</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="tab1">Followers</string>
+    <string name="tab2">Following</string>
+
+    
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

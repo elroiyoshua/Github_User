@@ -2,6 +2,7 @@ package com.example.githubuser
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,6 +32,15 @@ class MainActivity : AppCompatActivity() {
             rvUser.hasFixedSize()
             rvUser.adapter = adapter
         }
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: ItemsItem) {
+                Intent(this@MainActivity,DetailUserActivity::class.java).also {
+                    it.putExtra(DetailUserActivity.TAG_USERNAME,data.login)
+                    startActivity(it)
+                }
+            }
+
+        })
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
@@ -41,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             if (adapter.itemCount == 0){
                 viewModel.setSearch("elroi")
+
             }else{
                 adapter.notifyDataSetChanged()
             }
@@ -69,8 +80,9 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     viewModel.setSearch(query)
                     searchView.clearFocus()
-                    adapter.notifyDataSetChanged()
+                    showLoading(true)
                 }
+                showLoading(false)
                 return true
             }
             override fun onQueryTextChange(newText: String): Boolean {
