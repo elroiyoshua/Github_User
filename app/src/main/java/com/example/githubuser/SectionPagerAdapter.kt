@@ -1,12 +1,17 @@
 package com.example.githubuser
 
 import android.content.Context
+import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class SectionPagerAdapter(private val mCtx : Context, fm:FragmentManager): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionPagerAdapter(private val mCtx : Context, fm:FragmentManager,data :Bundle): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private var fragmentBundle : Bundle
+    init {
+        fragmentBundle = data
+    }
     override fun getCount(): Int =2
 
     @StringRes
@@ -18,6 +23,7 @@ class SectionPagerAdapter(private val mCtx : Context, fm:FragmentManager): Fragm
             0->fragment = FollowersFragment()
             1->fragment = FollowingFragment()
         }
+        fragment?.arguments = this.fragmentBundle
         return fragment as Fragment
     }
 
