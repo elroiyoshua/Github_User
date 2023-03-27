@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailUserActivity"
+    tools:context=".Detail.DetailUserActivity"
     android:fillViewport="true"
+    android:background="@color/ungmud"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,10 +16,14 @@
 
         <TextView
             android:id="@+id/tv_login"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:text="@string/login"
+            android:fontFamily="@font/lexendregular"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +31,9 @@
 
         <TextView
             android:id="@+id/tv_username"
+            android:fontFamily="@font/lexendregular"
+
+            android:textColor="@color/purple_700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -38,6 +45,9 @@
 
         <TextView
             android:id="@+id/tv_followers"
+            android:fontFamily="@font/lexendregular"
+
+            android:textColor="@color/purple_700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -54,6 +64,8 @@
 
         <TextView
             android:id="@+id/tv_following"
+            android:fontFamily="@font/lexendregular"
+            android:textColor="@color/purple_700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -87,7 +99,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_username" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_username"
+            android:background="@color/ungmud"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"

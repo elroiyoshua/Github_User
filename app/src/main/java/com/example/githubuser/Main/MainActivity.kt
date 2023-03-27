@@ -1,17 +1,19 @@
-package com.example.githubuser
+package com.example.githubuser.Main
 
+import com.example.githubuser.Detail.DetailUserActivity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuser.Model.ItemsItem
+import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,43 +23,36 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //supportActionBar?.hide()
         adapter = UserAdapter()
-        //adapter.notifyDataSetChanged()
         binding.apply {
             rvUser.layoutManager = LinearLayoutManager(this@MainActivity)
             rvUser.hasFixedSize()
             rvUser.adapter = adapter
         }
-        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+        showLoading(true)
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: ItemsItem) {
-                Intent(this@MainActivity,DetailUserActivity::class.java).also {
+                Intent(this@MainActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.TAG_USERNAME,data.login)
                     startActivity(it)
                 }
             }
 
         })
-
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-
-        viewModel.isLoading.observe(this,{
-            showLoading(it)
-        })
-
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            MainViewModel::class.java)
         binding.apply {
             if (adapter.itemCount == 0){
                 viewModel.setSearch("elroi")
-
             }else{
                 adapter.notifyDataSetChanged()
             }
         }
         viewModel.getSearchUssers().observe(this,{
             if(it!= null){
+                showLoading(false)
                 adapter.setList(it)
             }
         })
@@ -73,14 +68,17 @@ class MainActivity : AppCompatActivity() {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (query ==null){
+                showLoading(true)
+                if (query == null){
                     Toast.makeText(this@MainActivity, "Masukan Username", Toast.LENGTH_SHORT).show()
+                    showLoading(false)
                     searchView.clearFocus()
                 }else{
+                    showLoading(true)
                     viewModel.setSearch(query)
                     searchView.clearFocus()
-                    showLoading(true)
                 }
                 showLoading(false)
                 return true
@@ -95,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
         } else {
-            binding.progressBar.visibility = View.GONE
+            binding.progressBar.visibility = View.INVISIBLE
         }
     }
 }
