@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                     viewModel.setSearch(query)
                     searchView.clearFocus()
                 }
-                showLoading(false)
                 return true
             }
             override fun onQueryTextChange(newText: String): Boolean {
@@ -92,8 +91,10 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
+            binding.rvUser.visibility = View.INVISIBLE
         } else {
             binding.progressBar.visibility = View.INVISIBLE
+            binding.rvUser.visibility = View.VISIBLE
         }
     }
 }
