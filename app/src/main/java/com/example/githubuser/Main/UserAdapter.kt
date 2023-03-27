@@ -1,15 +1,10 @@
-package com.example.githubuser
+package com.example.githubuser.Main
 
-import android.app.Activity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.MainThread
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.githubuser.databinding.ActivityMainBinding
+import com.example.githubuser.Model.ItemsItem
 import com.example.githubuser.databinding.ItemRowBinding
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
@@ -38,7 +33,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
             }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
         val binding  =ItemRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }

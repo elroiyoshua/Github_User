@@ -10,12 +10,16 @@
     android:layout_marginTop="4dp"
     android:layout_marginRight="8dp"
     android:layout_marginBottom="4dp"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="4dp"
+
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/ungmud"
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_item_photo"
@@ -43,6 +47,9 @@
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toTopOf="@+id/img_item_photo"
-            tools:text="@string/name" />
+            tools:text="@string/name"
+            android:fontFamily="@font/lexendregular"
+            android:textColor="@color/purple_700"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

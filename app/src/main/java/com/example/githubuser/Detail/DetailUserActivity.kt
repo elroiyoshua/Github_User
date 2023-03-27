@@ -1,10 +1,10 @@
-package com.example.githubuser
+package com.example.githubuser.Detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.githubuser.Detail.SectionPagerAdapter
 import com.example.githubuser.databinding.ActivityDetailUserBinding
 
 class DetailUserActivity : AppCompatActivity() {
@@ -17,12 +17,15 @@ class DetailUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val username = intent.getStringExtra(TAG_USERNAME)
         val bundle = Bundle()
         bundle.putString(TAG_USERNAME,username)
 
-        viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
+        viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(
+            DetailUserViewModel::class.java)
 
         if (username != null) {
             viewModel.setUserDetail(username)
@@ -44,6 +47,10 @@ class DetailUserActivity : AppCompatActivity() {
             tablayouts.setupWithViewPager(viewPager)
 
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 

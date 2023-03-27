@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.Api
 
 import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient

@@ -1,5 +1,8 @@
-package com.example.githubuser
+package com.example.githubuser.Api
 
+import com.example.githubuser.Model.DetailUserResponse
+import com.example.githubuser.Model.GithubResponse
+import com.example.githubuser.Model.ItemsItem
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.Detail
 
 import android.content.Context
 import android.os.Bundle
@@ -6,8 +6,11 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.githubuser.R
 
-class SectionPagerAdapter(private val mCtx : Context, fm:FragmentManager,data :Bundle): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionPagerAdapter(private val mCtx : Context, fm: FragmentManager, data : Bundle): FragmentPagerAdapter(fm,
+    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+) {
     private var fragmentBundle : Bundle
     init {
         fragmentBundle = data
@@ -15,7 +18,7 @@ class SectionPagerAdapter(private val mCtx : Context, fm:FragmentManager,data :B
     override fun getCount(): Int =2
 
     @StringRes
-    private val TAB_TITLES = intArrayOf(R.string.tab1,R.string.tab2)
+    private val TAB_TITLES = intArrayOf(R.string.tab1, R.string.tab2)
 
     override fun getItem(position: Int): Fragment {
         var fragment : Fragment? = null
