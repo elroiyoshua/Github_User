@@ -1,6 +1,7 @@
-package com.example.githubuser.Model
+package com.example.githubuser.model
 
 import com.google.gson.annotations.SerializedName
+import kotlin.math.log
 
 data class GithubResponse(
 
@@ -15,7 +16,6 @@ data class GithubResponse(
 )
 
 data class ItemsItem(
-
 	@field:SerializedName("gists_url")
 	val gistsUrl: String,
 
@@ -29,7 +29,7 @@ data class ItemsItem(
 	val starredUrl: String,
 
 	@field:SerializedName("login")
-	val login: String,
+	var login: String,
 
 	@field:SerializedName("followers_url")
 	val followersUrl: String,
@@ -50,7 +50,7 @@ data class ItemsItem(
 	val receivedEventsUrl: String,
 
 	@field:SerializedName("avatar_url")
-	val avatarUrl: String,
+	var avatarUrl: String,
 
 	@field:SerializedName("events_url")
 	val eventsUrl: String,
@@ -62,7 +62,7 @@ data class ItemsItem(
 	val siteAdmin: Boolean,
 
 	@field:SerializedName("id")
-	val id: Int,
+	var id: Int,
 
 	@field:SerializedName("gravatar_id")
 	val gravatarId: String,
@@ -71,5 +71,6 @@ data class ItemsItem(
 	val nodeId: String,
 
 	@field:SerializedName("organizations_url")
-	val organizationsUrl: String
-)
+	val organizationsUrl: String)
+
+

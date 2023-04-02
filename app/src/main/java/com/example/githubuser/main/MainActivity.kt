@@ -1,18 +1,20 @@
-package com.example.githubuser.Main
+package com.example.githubuser.main
 
-import com.example.githubuser.Detail.DetailUserActivity
+import com.example.githubuser.detail.DetailUserActivity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.Model.ItemsItem
+import com.example.githubuser.Favorite.FavoriteActivity
+import com.example.githubuser.model.ItemsItem
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityMainBinding
 
@@ -36,6 +38,9 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClicked(data: ItemsItem) {
                 Intent(this@MainActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.TAG_USERNAME,data.login)
+                    it.putExtra(DetailUserActivity.TAG_ID,data.id)
+                    it.putExtra(DetailUserActivity.TAG_URL,data.avatarUrl)
+
                     startActivity(it)
                 }
             }
@@ -63,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
 
+
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
@@ -87,6 +93,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.favorite_menu ->{
+                Intent(this,FavoriteActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

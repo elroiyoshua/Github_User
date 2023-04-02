@@ -1,4 +1,4 @@
-package com.example.githubuser.Detail
+package com.example.githubuser.detail
 
 import android.content.Context
 import android.os.Bundle
