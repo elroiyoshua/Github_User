@@ -3,8 +3,10 @@ package com.example.githubuser.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityDetailUserBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -70,10 +72,14 @@ class DetailUserActivity : AppCompatActivity() {
                 if (username != null) {
                     if (avatarUrl != null) {
                         viewModel.addToFavorite(username,id,avatarUrl)
+                        //it.setBackgroundResource(R.drawable.baseline_favorite_24)
+                        Toast.makeText(this,"$username telah ditambahkan sebagai akun Favorite",Toast.LENGTH_SHORT).show()
                     }
                 }
             }else{
                 viewModel.removeFromFavorite(id)
+                //it.setBackgroundResource(R.drawable.baseline_favorite2_24)
+                Toast.makeText(this,"$username telah dihapus dari akun Favorite",Toast.LENGTH_SHORT).show()
             }
             binding.toggleFavorite.isChecked = _isChecked
         }

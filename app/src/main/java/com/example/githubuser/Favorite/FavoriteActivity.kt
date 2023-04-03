@@ -25,6 +25,8 @@ class FavoriteActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         showLoading(true)
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: ItemsItem) {
@@ -47,6 +49,7 @@ class FavoriteActivity : AppCompatActivity() {
             if(it != null){
                 val list = mapList(it)
                 adapter.setList(list)
+                showLoading(false)
             }
         })
 
@@ -56,8 +59,7 @@ class FavoriteActivity : AppCompatActivity() {
         val listUser = ArrayList<ItemsItem>()
 
         for(user in users ){
-            val userMapped = ItemsItem("","","","",user.login,"","","",""
-            ,0,"",user.avatarUrl,"","",false,user.id,"","","")
+            val userMapped = ItemsItem(user.login,user.id,user.avatarUrl)
             listUser.add(userMapped)
         }
         return listUser
@@ -72,5 +74,9 @@ class FavoriteActivity : AppCompatActivity() {
             binding.rvFav.visibility = View.VISIBLE
         }
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

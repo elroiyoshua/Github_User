@@ -10,14 +10,23 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.Favorite.FavoriteActivity
 import com.example.githubuser.model.ItemsItem
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityMainBinding
+import com.example.githubuser.setting.SettingActivity
+import com.example.githubuser.setting.SettingPreferences
+import com.example.githubuser.setting.SettingViewModel
+import com.example.githubuser.setting.ViewModelFactory
 
+private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private lateinit var viewModel: MainViewModel
@@ -27,6 +36,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pref =  SettingPreferences.getInstance(datastore)
+        val mainViewModel = ViewModelProvider(this,ViewModelFactory(pref)).get(
+            SettingViewModel::class.java
+        )
+        mainViewModel.getThemeSettings().observe(this){
+            if (it){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+
+
         adapter = UserAdapter()
         binding.apply {
             rvUser.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -99,6 +122,11 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.favorite_menu ->{
                 Intent(this,FavoriteActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+            R.id.setting_activity->{
+                Intent(this,SettingActivity::class.java).also{
                     startActivity(it)
                 }
             }
